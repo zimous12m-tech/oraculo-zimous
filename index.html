@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="theme-color" content="#080a0f">
+<meta name="description" content="Oráculo Causal Supremo — Bússola Universal e Tese de Zimous. Autor: Zimous David.">
+<title>Oráculo Causal Supremo — Teoria de Zimous v3.2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-color: #080a0f;
+    --card-bg: #11141d;
+    --card-hover: #171c28;
+    --text-main: #f1f5f9;
+    --text-muted: #a3b0c2;
+    --accent-gold: #d4af37;
+    --accent-gold-glow: rgba(212, 175, 55, 0.2);
+    --border-color: #1e2536;
+    --danger-red: #ef4444;
+    --warning-yellow: #f59e0b;
+    --success-green: #10b981;
+    --info-blue: #38bdf8;
+    --purple: #a78bfa;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 20px 16px 120px 16px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 820px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 22px 10px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 10px;
+}
+
+.tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    background: var(--accent-gold-glow);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+h1 {
+    font-family: 'Cinzel', serif;
+    color: var(--accent-gold);
+    font-size: clamp(1.4rem, 4vw, 2.1rem);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+p.sub {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-family: 'Lora', serif;
+    font-style: italic;
+}
+
+.author-credit {
+    font-size: 0.8rem;
+    color: var(--accent-gold);
+    margin-top: 6px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 22px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: border-color 0.3s ease;
+}
+
+.card:hover { border-color: rgba(212, 175, 55, 0.3); }
+
+.card h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.15rem;
+    color: #fff;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 10px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.form-group { margin-bottom: 16px; }
+.form-group:last-child { margin-bottom: 0; }
+
+label {
+    display: block;
+    font-size: 0.88rem;
+    color: var(--text-main);
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.param-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.info-btn {
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--info-blue);
+    border: 1px solid var(--info-blue);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    font-size: 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    padding: 0;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+.info-btn:hover { background: rgba(56, 189, 248, 0.3); }
+
+.help-box {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--info-blue);
+    background: rgba(56, 189, 248, 0.08);
+    border-left: 3px solid var(--info-blue);
+    padding: 8px 12px;
+    border-radius: 6px;
+    line-height: 1.4;
+    display: none;
+}
+
+.description {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+input[type="text"], textarea, select {
+    width: 100%;
+    background: #080a0f;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 12px;
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+    min-height: 44px;
+}
+
+input[type="text"]:focus, textarea:focus, select:focus { border-color: var(--accent-gold); }
+textarea { min-height: 85px; resize: vertical; }
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(0,0,0,0.2);
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.02);
+    margin-top: 6px;
+}
+
+input[type="range"] {
+    flex: 1;
+    accent-color: var(--accent-gold);
+    cursor: pointer;
+    height: 44px;
+}
+
+.val-badge {
+    background: rgba(255,255,255,0.05);
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    min-width: 45px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    color: var(--accent-gold);
+}
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media(max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+.btn-main {
+    background: linear-gradient(135deg, var(--accent-gold), #b58a10);
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 20px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.2s, opacity 0.2s;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+    font-family: 'Inter', sans-serif;
+    margin-top: 10px;
+    min-height: 50px;
+}
+
+.btn-main:active { transform: scale(0.98); }
+.btn-main:hover { opacity: 0.92; }
+
+.btn-secondary {
+    background: #1e2536;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 11px 16px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    min-height: 44px;
+}
+
+.btn-secondary:hover { background: #262f45; }
+
+.btn-small {
+    background: #1e2536;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-weight: 600;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-small:hover { background: #262f45; }
+.btn-small.danger { border-color: rgba(239,68,68,0.4); color: var(--danger-red); }
+.btn-small.danger:hover { background: rgba(239,68,68,0.15); }
+
+.actions-group { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+.actions-group button { flex: 1; min-width: 140px; }
+
+.results-box { border: 2px solid var(--border-color); display: none; animation: fadeIn 0.5s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.status-title { font-family: 'Cinzel', serif; font-size: 1.35rem; font-weight: 700; margin-bottom: 6px; text-align: center; }
+.status-subtitle { text-align: center; font-size: 0.88rem; color: var(--text-muted); margin-bottom: 18px; font-family: 'Lora', serif; font-style: italic; }
+
+.metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.metric-card { background: rgba(0,0,0,0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px; text-align: center; }
+.metric-card span { display: block; font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.metric-card strong { font-size: 1.5rem; color: #fff; }
+
+.gauge-bar-bg { width: 100%; height: 12px; background: #080a0f; border-radius: 6px; overflow: hidden; margin: 15px 0; border: 1px solid var(--border-color); }
+.gauge-bar-fill { height: 100%; width: 0%; transition: width 0.6s ease, background-color 0.6s ease; }
+
+.verdict-box { background: #080a0f; border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; margin-top: 15px; line-height: 1.6; font-family: 'Lora', serif; }
+.verdict-box h3 { font-family: 'Cinzel', serif; color: var(--accent-gold); font-size: 1.05rem; margin-bottom: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 10px; }
+th, td { padding: 10px 8px; border-bottom: 1px solid var(--border-color); text-align: left; }
+th { color: var(--text-muted); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; }
+td:last-child { text-align: right; font-weight: 700; color: var(--accent-gold); }
+
+.footer-note { text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 30px; letter-spacing: 1px; text-transform: uppercase; }
+
+.error-banner {
+    display: none;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid var(--danger-red);
+    color: #fecaca;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.profile-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--info-blue);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+.ea-inference {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* ─── TESE DE ZIMOUS (ACORDEÃO) ─── */
+.thesis-card {
+    border-color: rgba(167, 139, 250, 0.3);
+    background: linear-gradient(135deg, rgba(17,20,29,0.95), rgba(26,20,38,0.95));
+}
+.thesis-card h2 { color: var(--purple); }
+.thesis-content {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+}
+.thesis-content h4 {
+    font-family: 'Cinzel', serif;
+    color: var(--accent-gold);
+    font-size: 0.95rem;
+    margin: 14px 0 6px 0;
+}
+.thesis-content p { margin-bottom: 8px; color: var(--text-muted); }
+.thesis-content ul { margin-left: 18px; margin-bottom: 10px; color: var(--text-muted); }
+.thesis-content li { margin-bottom: 4px; }
+
+/* ─── SELETOR DE SUJEITO ─── */
+.subject-selector {
+    background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(56,189,248,0.05));
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+.subject-selector h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    color: var(--accent-gold);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.subject-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+.subject-row .form-group { flex: 1; min-width: 200px; margin-bottom: 0; }
+.autocomplete-wrap { position: relative; }
+.autocomplete-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--accent-gold);
+    border-radius: 0 0 10px 10px;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 100;
+    display: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+.autocomplete-list.visible { display: block; }
+.autocomplete-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.autocomplete-item:last-child { border-bottom: none; }
+.autocomplete-item:hover, .autocomplete-item.highlighted {
+    background: rgba(212, 175, 55, 0.15);
+}
+.autocomplete-item .subj-name { font-weight: 600; }
+.autocomplete-item .subj-count {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.05);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.load-info {
+    font-size: 0.78rem;
+    color: var(--success-green);
+    margin-top: 8px;
+    display: none;
+}
+.load-info.visible { display: block; }
+
+/* ─── GRÁFICO DE EVOLUÇÃO ─── */
+.chart-container {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 15px;
+}
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+.chart-header h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--accent-gold);
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+.chart-toggle {
+    display: flex;
+    background: rgba(0,0,0,0.4);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+.chart-toggle button {
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.chart-toggle button.active {
+    background: rgba(212, 175, 55, 0.2);
+    color: var(--accent-gold);
+}
+.chart-svg {
+    width: 100%;
+    height: 220px;
+    display: block;
+    overflow: visible;
+}
+.chart-legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 0.75rem;
+    margin-top: 12px;
+    color: var(--text-muted);
+}
+.chart-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.chart-legend .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.chart-tooltip {
+    position: absolute;
+    background: #080a0f;
+    border: 1px solid var(--accent-gold);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.78rem;
+    pointer-events: none;
+    display: none;
+    z-index: 50;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    color: var(--text-main);
+}
+.chart-wrap { position: relative; }
+
+/* ─── HISTÓRICO AGRUPADO ─── */
+.subject-group {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.15);
+}
+.subject-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.02);
+    transition: background 0.2s;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.subject-header:hover { background: rgba(255,255,255,0.05); }
+.subject-header .name {
+    font-weight: 700;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.subject-header .meta {
+    display: flex;
+    gap: 12px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    align-items: center;
+    flex-wrap: wrap;
+}
+.subject-header .arrow {
+    transition: transform 0.3s;
+    color: var(--text-muted);
+}
+.subject-group.open .subject-header .arrow { transform: rotate(180deg); }
+.subject-tests {
+    display: none;
+    padding: 0;
+    border-top: 1px solid var(--border-color);
+}
+.subject-group.open .subject-tests { display: block; }
+
+.test-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+}
+.test-item:last-child { border-bottom: none; }
+.test-item .test-date { color: var(--text-muted); font-size: 0.78rem; }
+.test-item .test-meta { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+.test-item .test-balance { font-weight: 700; font-size: 1rem; }
+.test-item .test-balance.pos { color: var(--success-green); }
+.test-item .test-balance.neg { color: var(--danger-red); }
+.test-item .test-balance.neu { color: var(--warning-yellow); }
+.test-item .test-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.test-item .test-actions button { padding: 5px 10px; font-size: 0.72rem; }
+
+.history-empty {
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 24px 16px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.install-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--accent-gold);
+    color: #000;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+    z-index: 999;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    min-height: 48px;
+}
+.install-btn:hover { opacity: 0.9; }
+
+@media print {
+    body { background: #fff !important; color: #000 !important; padding: 0; font-size: 11pt; }
+    .card, .verdict-box, .metric-card, .chart-container, .subject-group {
+        background: #fff !important;
+        border: 1.5px solid #000 !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+    }
+    h1, h2, h3, .status-title, td:last-child, .val-badge { color: #000 !important; }
+    p, span, label, td, th, .test-date, .test-meta { color: #222 !important; }
+    .btn-main, .actions-group, .info-btn, .install-btn, .test-actions, .chart-toggle, .subject-selector, #formCard, #btnProcessar, #eaCard, #ddCard, #amCard, #contextCard, #thesisCard {
+        display: none !important;
+    }
+    .tag { border: 1px solid #000 !important; color: #000 !important; background: transparent !important; }
+    .subject-tests { display: block !important; }
+    .print-header { display: block !important; text-align: center; margin-bottom: 20px; }
+    .print-header h2 { font-family: 'Cinzel', serif; font-size: 16pt; }
+    .print-header p { font-size: 10pt; color: #333; font-style: italic; }
+}
+
+.print-header { display: none; }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="error-banner" id="errorBanner" role="alert"></div>
+
+    <header>
+        <span class="tag">Teoria de Zimous • Oráculo Universal v3.2</span>
+        <h1>Oráculo Causal Supremo</h1>
+        <p class="sub">Avaliação exploratória longitudinal — posição, inércia, recursos e alavancagem</p>
+        <div class="author-credit">Autor: Zimous David</div>
+    </header>
+
+    <div class="print-header">
+        <h2>Oráculo Causal Supremo — Relatório Longitudinal</h2>
+        <p>Teoria de Zimous — Autor: Zimous David</p>
+    </div>
+
+    <div class="card" role="note" aria-label="Âmbito e privacidade da ferramenta" style="border-left: 3px solid var(--info-blue);">
+        <h3 style="margin-bottom:8px;">Como interpretar os resultados</h3>
+        <p style="color:var(--text-muted); line-height:1.65;">Esta aplicação operacionaliza a Teoria de Zimous como um modelo exploratório de reflexão e planeamento. Os índices AM, DD e EA dependem das escalas e dos pesos definidos no próprio modelo; não são medidas científicas validadas, nem diagnósticos clínicos, psicológicos ou financeiros. Usa os resultados como hipóteses para reflexão, confronta-os com a realidade e ajusta-os quando necessário.</p>
+        <p style="color:var(--text-muted); line-height:1.65; margin-top:8px;"><strong>Privacidade:</strong> o histórico é guardado no armazenamento local deste navegador/dispositivo. Pode desaparecer se os dados do navegador forem apagados e não é automaticamente sincronizado com outros dispositivos. Evita introduzir dados pessoais sensíveis de terceiros.</p>
+    </div>
+
+    <!-- PAINEL DA TESE DE ZIMOUS -->
+    <div class="card thesis-card">
+        <h2>
+            <span>Fundamentos da Teoria de Zimous</span>
+            <button type="button" class="btn-small" onclick="toggleThesis()" id="thesisToggleBtn">Expandir</button>
+        </h2>
+        <div class="thesis-content" id="thesisBody" style="display:none;">
+            <h4>1. A Mecânica da Realidade (A Inércia do Rio)</h4>
+            <p>O indivíduo está inserido num sistema de condições que não escolheu (o rio). A sobrevivência e o progresso dependem da relação assimétrica entre a inércia do meio (DD) e os recursos finitos (AM), modulados pelo tipo de ação (EA).</p>
+            <ul>
+                <li><strong>Dinâmica Dominante (DD):</strong> 5 dimensões de resistência (Desgaste, Obrigações, Hábitos, Finanças, Desconhecimento).</li>
+                <li><strong>Ação Moduladora (AM):</strong> 4 dimensões de recursos (Tempo, Energia, Conhecimento, Margem de Risco). Calculada por média geométrica ponderada.</li>
+                <li><strong>Eficiência da Ação (EA):</strong> 0.5 (Ação Bruta), 1.0 (Ação Direta) e 1.8 (Ação Estrutural).</li>
+            </ul>
+
+            <h4>2. A Evolução Coletiva (O Barco e a Bolha)</h4>
+            <p>Percebendo a fragilidade da travessia isolada, os homens unem-se num barco coletivo com divisão hierárquica do trabalho. Criam bolhas tecnológicas e culturais para filtrar a entropia externa e prolongar a durabilidade da civilização face à inércia do universo.</p>
+
+            <h4>3. O Deus Relativo e o Loop Causal</h4>
+            <p>A perfeição de Deus não é estática nem pré-existente. Ela é emergente e relativa: constrói-se retroativamente através da aquisição progressiva da totalidade das causas do cosmos. Ao mapear e dominar todas as leis universais, o homem fecha o loop cósmico, tornando-se a própria causa primária.</p>
+        </div>
+    </div>
+
+    <!-- SELETOR DE SUJEITO -->
+    <div class="card subject-selector" id="subjectSelectorCard">
+        <h3>
+            <span>Sujeito em Análise</span>
+            <button type="button" class="btn-small" onclick="newSubject()">+ Novo Sujeito</button>
+        </h3>
+        <div class="subject-row">
+            <div class="form-group autocomplete-wrap">
+                <label for="subjectInput">Nome do Sujeito</label>
+                <input id="subjectInput" type="text" maxlength="100" placeholder="Escreve um nome ou escolhe da lista" autocomplete="off" aria-label="Nome do sujeito">
+                <div class="autocomplete-list" id="autocompleteList"></div>
+            </div>
+            <div class="form-group" style="flex: 0 0 auto; min-width: auto;">
+                <label for="baseTestSelect">Base de Pré-preenchimento</label>
+                <select id="baseTestSelect" aria-label="Escolher teste base" style="min-width: 200px;">
+                    <option value="">— Vazio (novo perfil) —</option>
+                </select>
+            </div>
+            <button type="button" class="btn-secondary" id="btnLoadBase" onclick="loadBaseTest()" style="min-width: auto;">Carregar</button>
+        </div>
+        <p class="load-info" id="loadInfo"></p>
+    </div>
+
+    <!-- BLOCO 1: IDENTIFICAÇÃO -->
+    <div class="card" id="contextCard">
+        <h2>1. Contexto do Agente / Situacional</h2>
+        <div class="grid-2">
+            <div class="form-group">
+                <label for="userName">Nome / Identificação</label>
+                <input id="userName" type="text" maxlength="100" placeholder="Ex: Zimous / Viajante / Anónimo" aria-label="Nome ou identificação">
+            </div>
+            <div class="form-group">
+                <label for="userProfile">Perfil de Contexto <span class="profile-badge" id="profileBadge">GERAL</span></label>
+                <select id="userProfile" aria-label="Perfil de contexto">
+                    <option value="geral">Geral / Transição de Vida</option>
+                    <option value="crise">Colapso / Depressão / Exaustão Severa</option>
+                    <option value="elite">Abundância / Vazio Existencial (Elite)</option>
+                    <option value="projeto">Construtor / Empreendedor de Projetos</option>
+                </select>
+                <span class="description" id="profileInfo" style="display:block; margin-top:6px;">Pesos equilibrados entre todas as dimensões.</span>
+            </div>
+        </div>
+        <div class="form-group" style="margin-top: 14px;">
+            <label for="situation">Qual é o estado atual ou o problema crítico?</label>
+            <textarea id="situation" placeholder="Descreve objetivamente o que está a acontecer..."></textarea>
+        </div>
+        <div class="form-group" style="margin-top: 14px;">
+            <label for="objective">Para onde pretendes mover a trajetória?</label>
+            <textarea id="objective" placeholder="Ex: Estabilizar a base, recuperar energia vital..."></textarea>
+        </div>
+    </div>
+
+    <!-- BLOCO 2: DD -->
+    <div class="card" id="ddCard">
+        <h2>2. Dinâmica Dominante (DD — Forças do Rio)</h2>
+        <p class="description">Pressão inercial do meio CONTRA a tua mudança (0 = ausente, 100 = esmagador). DD usa média geométrica ponderada por perfil.</p>
+
+        <div class="form-group">
+            <div class="param-header">
+                <label>Desgaste Físico / Emocional Acumulado</label>
+                <button type="button" class="info-btn" onclick="toggleHelp('h_ddEx')" aria-label="Ajuda">?</button>
+            </div>
+            <div class="help-box" id="h_ddEx">Nível de fadiga acumulada e stresse diário.</div>
+            <div class="slider-container">
+                <input type="range" id="ddExhaustion" min="1" max="100" value="65" oninput="updateVal('v_ddEx', this.value)" aria-label="Desgaste">
+                <span class="val-badge" id="v_ddEx">65</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="param-header">
+                <label>Obrigações / Responsabilidades Fixas</label>
+                <button type="button" class="info-btn" onclick="toggleHelp('h_ddOb')" aria-label="Ajuda">?</button>
+            </div>
+            <div class="help-box" id="h_ddOb">Peso incompressível das tarefas diárias.</div>
+            <div class="slider-container">
+                <input type="range" id="ddObligations" min="1" max="100" value="70" oninput="updateVal('v_ddOb', this.value)" aria-label="Obrigações">
+                <span class="val-badge" id="v_ddOb">70</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="param-header">
+                <label>Hábitos / Inércia Comportamental</label>
+                <button type="button" class="info-btn" onclick="toggleHelp('h_ddHab')" aria-label="Ajuda">?</button>
+            </div>
+            <div class="help-box" id="h_ddHab">A força com que a rotina se reproduz automaticamente.</div>
+            <div class="slider-container">
+                <input type="range" id="ddHabits" min="1" max="100" value="60" oninput="updateVal('v_ddHab', this.value)" aria-label="Hábitos">
+                <span class="val-badge" id="v_ddHab">60</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="param-header">
+                <label>Pressão Financeira / Escassez</label>
+                <button type="button" class="info-btn" onclick="toggleHelp('h_ddFin')" aria-label="Ajuda">?</button>
+            </div>
+            <div class="help-box" id="h_ddFin">Urgência ou stresse material.</div>
+            <div class="slider-container">
+                <input type="range" id="ddFinancial" min="1" max="100" value="50" oninput="updateVal('v_ddFin', this.value)" aria-label="Pressão financeira">
+                <span class="val-badge" id="v_ddFin">50</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="param-header">
+                <label>Desconhecimento Técnico / Falta de Clareza</label>
+                <button type="button" class="info-btn" onclick="toggleHelp('h_ddUnk')" aria-label="Ajuda">?</button>
+            </div>
+            <div class="help-box" id="h_ddUnk">Falta de know-how prático.</div>
+            <div class="slider-container">
+                <input type="range" id="ddUnknown" min="1" max="100" value="55" oninput="updateVal('v_ddUnk', this.value)" aria-label="Desconhecimento">
+                <span class="val-badge" id="v_ddUnk">55</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLOCO 3: AM -->
+    <div class="card" id="amCard">
+        <h2>3. Ação Moduladora (AM — Recursos Disponíveis)</h2>
+        <p class="description">Recursos mobilizáveis (0 = esgotados, 100 = plenos). Média geométrica ponderada.</p>
+
+        <div class="form-group">
+            <div class="param-header">
+                <label>Tempo Útil e Desimpedido</label>
+                <button type="button" class="info-btn" onclick="toggleHelp('h_amTime')" aria-label="Ajuda">?</button>
+            </div>
+            <div class="help-box" id="h_amTime">Horas semanais livres para o objetivo.</div>
+            <div class="slider-container">
+                <input type="range" id="amTime" min="1" max="100" value="35" oninput="updateVal('v_amTime', this.value)" aria-label="Tempo">
+                <span class="val-badge" id="v_amTime">35</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="param-header">
+                <label>Energia Vital Disponível</label>
+                <button type="button" class="info-btn" onclick="toggleHelp('h_amEn')" aria-label="Ajuda">?</button>
+            </div>
+            <div class="help-box" id="h_amEn">Vigor físico e clareza mental restantes.</div>
+            <div class="slider-container">
+                <input type="range" id="amEnergy" min="1" max="100" value="30" oninput="updateVal('v_amEnergy', this.value)" aria-label="Energia">
+                <span class="val-badge" id="v_amEnergy">30</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="param-header">
+                <label>Conhecimento / Clareza Operacional</label>
+                <button type="button" class="info-btn" onclick="toggleHelp('h_amKnow')" aria-label="Ajuda">?</button>
+            </div>
+            <div class="help-box" id="h_amKnow">Domínio prático ou técnico.</div>
+            <div class="slider-container">
+                <input type="range" id="amKnowledge" min="1" max="100" value="45" oninput="updateVal('v_amKnow', this.value)" aria-label="Conhecimento">
+                <span class="val-badge" id="v_amKnow">45</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="param-header">
+                <label>Margem de Risco / Tolerância a Erro</label>
+                <button type="button" class="info-btn" onclick="toggleHelp('h_amRisk')" aria-label="Ajuda">?</button>
+            </div>
+            <div class="help-box" id="h_amRisk">Segurança para errar e testar.</div>
+            <div class="slider-container">
+                <input type="range" id="amRisk" min="1" max="100" value="40" oninput="updateVal('v_amRisk', this.value)" aria-label="Risco">
+                <span class="val-badge" id="v_amRisk">40</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLOCO 4: EA -->
+    <div class="card" id="eaCard">
+        <h2>4. Eficiência da Ação (EA — Inferida Comportamentalmente)</h2>
+        <p class="description">Responde ao teu comportamento real. O EA é calculado a partir das respostas.</p>
+
+        <div class="form-group">
+            <label for="q1">Quando algo falha repetidamente, o que fazes?</label>
+            <select id="q1" aria-label="Pergunta 1">
+                <option value="0.5">Tento outra vez com mais força e disciplina</option>
+                <option value="1.0" selected>Mudo a abordagem e o timing</option>
+                <option value="1.8">Mudo as condições do sistema onde estou inserido</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="q2">Como distribuis a tua energia semanal?</label>
+            <select id="q2" aria-label="Pergunta 2">
+                <option value="0.5">Tudo em urgências e reação</option>
+                <option value="1.0" selected>Equilibro reação e alguns projetos</option>
+                <option value="1.8">Protejo blocos para criar estruturas novas</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="q3">Quando enfrentas um obstáculo grande, tu:</label>
+            <select id="q3" aria-label="Pergunta 3">
+                <option value="0.5">Empurras mais forte contra ele</option>
+                <option value="1.0" selected>Contornas e resolves o imediato</option>
+                <option value="1.8">Remove-lo mudando o percurso à volta</option>
+            </select>
+        </div>
+
+        <div class="ea-inference" id="eaInference"></div>
+
+        <div class="form-group" style="margin-top: 14px;">
+            <label for="eaOverride">Override Manual (opcional)</label>
+            <select id="eaOverride" aria-label="Override do EA">
+                <option value="auto" selected>Automático (usar EA inferido)</option>
+                <option value="0.5">EA = 0.5 (Ação Bruta)</option>
+                <option value="1.0">EA = 1.0 (Ação Pontual)</option>
+                <option value="1.8">EA = 1.8 (Ação Estrutural)</option>
+            </select>
+        </div>
+
+        <div class="form-group" style="margin-top: 14px;">
+            <label>Retroalimentação da DD (Ciclo Vicioso)</label>
+            <p class="description">Os teus problemas multiplicam-se entre si? (0 = isolados, 100 = ciclo destrutivo).</p>
+            <div class="slider-container">
+                <input type="range" id="feedback" min="0" max="100" value="60" oninput="updateVal('v_fb', this.value)" aria-label="Feedback">
+                <span class="val-badge" id="v_fb">60</span>
+            </div>
+        </div>
+
+        <button type="button" class="btn-main" id="btnProcessar">PROCESSAR DIAGNÓSTICO CAUSAL</button>
+    </div>
+
+    <!-- RESULTADOS -->
+    <div class="card results-box" id="resultsCard">
+        <div class="status-title" id="rTitle">DIAGNÓSTICO CAUSAL</div>
+        <div class="status-subtitle" id="rSubtitle">Análise estrutural da posição no rio</div>
+
+        <div class="metrics-grid">
+            <div class="metric-card"><span>AM Disponível</span><strong id="mAM">0</strong></div>
+            <div class="metric-card"><span>DD Efetiva</span><strong id="mDD">0</strong></div>
+            <div class="metric-card"><span>EA Aplicado</span><strong id="mEA">1.0</strong></div>
+            <div class="metric-card"><span>Efeito Útil</span><strong id="mEff">0</strong></div>
+            <div class="metric-card"><span>Balanço</span><strong id="mMargin">0</strong></div>
+        </div>
+
+        <div class="gauge-bar-bg">
+            <div class="gauge-bar-fill" id="gaugeFill"></div>
+        </div>
+
+        <div class="verdict-box">
+            <h3>Leitura do Sistema</h3>
+            <p id="vReading" style="color: var(--text-main); font-family: 'Inter', sans-serif; font-size: 0.95rem; line-height: 1.6;"></p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 15px;">
+            <div class="verdict-box" style="margin-top: 0;">
+                <h3>Maiores Fontes de Inércia (DD)</h3>
+                <table id="tableDD"></table>
+            </div>
+            <div class="verdict-box" style="margin-top: 0;">
+                <h3>Maiores Défices de Recursos (AM)</h3>
+                <table id="tableAM"></table>
+            </div>
+        </div>
+
+        <!-- SIMULADOR -->
+        <div class="verdict-box" style="border-color: var(--info-blue); margin-top: 15px;">
+            <h3>Simulador de Menor Esforço</h3>
+            <p class="description" style="margin-bottom: 10px;">Testa o impacto de reduzir a inércia (DD) ou subir o EA:</p>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Simular Redução de DD (- X pontos)</label>
+                    <input type="range" id="simDDDrop" min="0" max="50" value="0" oninput="runSimulation()" aria-label="Simular DD">
+                    <span id="simDDVal" style="color: var(--info-blue); font-weight: bold;">0 pontos</span>
+                </div>
+                <div class="form-group">
+                    <label>Simular Novo EA</label>
+                    <select id="simEA" onchange="runSimulation()" aria-label="Simular EA">
+                        <option value="0.5">EA = 0.5 (Bruta)</option>
+                        <option value="1.0" selected>EA = 1.0 (Direta)</option>
+                        <option value="1.8">EA = 1.8 (Estrutural)</option>
+                    </select>
+                </div>
+            </div>
+            <p id="simResult" style="margin-top: 10px; font-weight: 600; color: var(--info-blue); font-family: 'Inter', sans-serif;"></p>
+        </div>
+
+        <div class="verdict-box" style="border-color: var(--accent-gold);">
+            <h3>Prescrição Causal</h3>
+            <p id="vPrescription" style="color: var(--text-main); font-family: 'Inter', sans-serif; font-size: 0.95rem; line-height: 1.6;"></p>
+        </div>
+
+        <div class="actions-group">
+            <button type="button" class="btn-secondary" onclick="window.print()">Imprimir / PDF</button>
+            <button type="button" class="btn-secondary" onclick="exportJSON()">Descarregar JSON</button>
+            <button type="button" class="btn-secondary" onclick="saveLocal()" id="btnSave">Guardar no Histórico</button>
+            <button type="button" class="btn-secondary" onclick="resetForm()">Novo Diagnóstico</button>
+        </div>
+    </div>
+
+    <!-- GRÁFICO DE EVOLUÇÃO -->
+    <div class="card" id="chartCard" style="display:none;">
+        <div class="chart-header">
+            <h3>Evolução de <span id="chartSubjectName" style="color: var(--accent-gold);"></span></h3>
+            <div class="chart-toggle" role="tablist">
+                <button type="button" id="chartModeSimple" class="active" onclick="setChartMode('simple')">Balanço</button>
+                <button type="button" id="chartModeDetailed" onclick="setChartMode('detailed')">Detalhado</button>
+            </div>
+        </div>
+        <div class="chart-wrap">
+            <svg class="chart-svg" id="evolutionChart" viewBox="0 0 800 220" preserveAspectRatio="none" aria-label="Gráfico de evolução"></svg>
+            <div class="chart-tooltip" id="chartTooltip"></div>
+        </div>
+        <div class="chart-legend" id="chartLegend"></div>
+        <div class="actions-group" style="margin-top: 12px;">
+            <button type="button" class="btn-secondary" onclick="exportSubjectJSON()">Exportar JSON deste Sujeito</button>
+            <button type="button" class="btn-secondary" onclick="exportAISummary()">Resumo para IA (Markdown)</button>
+            <button type="button" class="btn-secondary" onclick="printSubject()">Imprimir Relatório do Sujeito</button>
+        </div>
+    </div>
+
+    <!-- HISTÓRICO -->
+    <div class="card" id="historyCard">
+        <h2>Histórico por Sujeito <span class="profile-badge" id="histCount">0</span></h2>
+        <div id="historyList">
+            <p class="history-empty">Ainda sem diagnósticos guardados.<br>Corre o oráculo e clica em <strong>Guardar no Histórico</strong>.</p>
+        </div>
+        <div class="actions-group" id="histActions" style="display:none;">
+            <button type="button" class="btn-secondary" onclick="exportHistory()">Exportar Histórico Completo</button>
+            <button type="button" class="btn-secondary danger" onclick="clearHistory()" style="border-color: var(--danger-red); color: var(--danger-red);">Limpar Tudo</button>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        Oráculo Causal Supremo v3.2 • Teoria de Zimous • Autor: Zimous David
+    </div>
+</div>
+
+<button class="install-btn" id="installBtn" aria-label="Instalar aplicação">
+    <span>⬇</span> Instalar App
+</button>
+
+<script>
+(function () {
+    "use strict";
+
+    var SCHEMA_VERSION = "3.2";
+    var HIST_KEY = "oraculo_zimous_hist_v31";
+    var MAX_HIST = 200;
+
+    var globalData = {};
+    var rawBase = {};
+    var chartMode = "simple";
+    var currentSubject = null;
+
+    var PROFILES = {
+        geral: {
+            label: "GERAL",
+            ddWeights: { ex: 1, ob: 1, hab: 1, fin: 1, unk: 1 },
+            amWeights: { time: 1, energy: 1, know: 1, risk: 1 },
+            thresholds: { positive: 15, neutral: -10 },
+            info: "Pesos equilibrados entre todas as dimensões."
+        },
+        crise: {
+            label: "CRISE",
+            ddWeights: { ex: 1.6, ob: 1.2, hab: 1.0, fin: 1.3, unk: 0.8 },
+            amWeights: { time: 0.8, energy: 1.6, know: 0.9, risk: 1.1 },
+            thresholds: { positive: 12, neutral: -6 },
+            info: "Modo crise: energia vital e desgaste pesam mais."
+        },
+        elite: {
+            label: "ELITE",
+            ddWeights: { ex: 0.9, ob: 1.1, hab: 1.2, fin: 0.6, unk: 1.4 },
+            amWeights: { time: 1.1, energy: 1.0, know: 1.4, risk: 1.3 },
+            thresholds: { positive: 18, neutral: -8 },
+            info: "Modo elite: clareza e margem de risco pesam mais."
+        },
+        projeto: {
+            label: "PROJETO",
+            ddWeights: { ex: 1.1, ob: 1.2, hab: 1.3, fin: 1.0, unk: 1.2 },
+            amWeights: { time: 1.5, energy: 1.1, know: 1.3, risk: 1.4 },
+            thresholds: { positive: 15, neutral: -10 },
+            info: "Modo construtor: tempo, conhecimento e risco pesam mais na AM."
+        }
+    };
+
+    function toggleThesis() {
+        var body = document.getElementById('thesisBody');
+        var btn = document.getElementById('thesisToggleBtn');
+        if (!body || !btn) return;
+        if (body.style.display === 'none') {
+            body.style.display = 'block';
+            btn.innerText = 'Recolher';
+        } else {
+            body.style.display = 'none';
+            btn.innerText = 'Expandir';
+        }
+    }
+
+    function showError(msg) {
+        var b = document.getElementById('errorBanner');
+        if (b) { b.textContent = "Erro: " + msg; b.style.display = 'block'; }
+    }
+    function updateVal(id, val) {
+        var el = document.getElementById(id);
+        if (el) el.innerText = val;
+    }
+    function toggleHelp(id) {
+        var box = document.getElementById(id);
+        if (!box) return;
+        box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+    function val(id) { var el = document.getElementById(id); return el ? Number(el.value) : 0; }
+    function str(id) { var el = document.getElementById(id); return el ? el.value : ''; }
+    function round2(n) { return Math.round(n * 100) / 100; }
+    function escapeHtml(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    }
+
+    function weightedGeoMean(values, weights) {
+        var logSum = 0, weightSum = 0;
+        for (var i = 0; i < values.length; i++) {
+            var v = Math.max(1, values[i]);
+            var w = weights[i] || 1;
+            logSum += w * Math.log(v);
+            weightSum += w;
+        }
+        return Math.exp(logSum / weightSum);
+    }
+
+    function inferEA() {
+        var q1 = Number(document.getElementById('q1').value);
+        var q2 = Number(document.getElementById('q2').value);
+        var q3 = Number(document.getElementById('q3').value);
+        return Math.pow(q1 * q2 * q3, 1/3);
+    }
+    function getEA() {
+        var override = str('eaOverride');
+        if (override !== 'auto') return Number(override);
+        return inferEA();
+    }
+    function eaLabel(ea) {
+        if (ea < 0.75) return { short: "0.5 (Bruta)", desc: "Ação Bruta / Voluntarista. Esforço cego contra o ambiente." };
+        if (ea < 1.4) return { short: "1.0 (Direta)", desc: "Ação Pontual / Direta. Resolves fogos isolados." };
+        return { short: "1.8 (Estrutural)", desc: "Ação Estrutural / Alavancada. Reconfiguras o ambiente." };
+    }
+    function refreshEAInference() {
+        var ea = getEA();
+        var info = eaLabel(ea);
+        var box = document.getElementById('eaInference');
+        if (box) {
+            box.innerHTML = "<strong>EA aplicado:</strong> " + info.short + " — " + info.desc +
+                (str('eaOverride') !== 'auto' ? " <em>(override manual)</em>" : "");
+        }
+    }
+    function refreshProfileInfo() {
+        var p = str('userProfile');
+        var profile = PROFILES[p] || PROFILES.geral;
+        var badge = document.getElementById('profileBadge');
+        var info = document.getElementById('profileInfo');
+        if (badge) badge.innerText = profile.label;
+        if (info) info.innerText = profile.info;
+    }
+
+    function loadHistory() {
+        try {
+            var raw = localStorage.getItem(HIST_KEY);
+            if (!raw) return [];
+            var arr = JSON.parse(raw);
+            return Array.isArray(arr) ? arr : [];
+        } catch (e) { return []; }
+    }
+    function saveHistory(arr) {
+        try {
+            if (arr.length > MAX_HIST) arr = arr.slice(-MAX_HIST);
+            localStorage.setItem(HIST_KEY, JSON.stringify(arr));
+        } catch (e) { showError("Não foi possível guardar: " + e.message); }
+    }
+
+    function groupBySubject(hist) {
+        var groups = {};
+        hist.forEach(function (h, idx) {
+            var name = (h.identificacao && h.identificacao.nome) ? h.identificacao.nome.trim() : 'Sem nome';
+            if (!groups[name]) groups[name] = [];
+            groups[name].push({ test: h, originalIndex: idx });
+        });
+        return groups;
+    }
+
+    function getSubjects() {
+        var hist = loadHistory();
+        var groups = groupBySubject(hist);
+        return Object.keys(groups).map(function (name) {
+            return { name: name, count: groups[name].length, tests: groups[name] };
+        }).sort(function (a, b) { return a.name.localeCompare(b.name); });
+    }
+
+    function renderAutocomplete(filter) {
+        var list = document.getElementById('autocompleteList');
+        if (!list) return;
+        var subjects = getSubjects();
+        var f = (filter || '').toLowerCase().trim();
+        var filtered = subjects.filter(function (s) {
+            return !f || s.name.toLowerCase().indexOf(f) !== -1;
+        });
+        if (filtered.length === 0) {
+            list.classList.remove('visible');
+            list.innerHTML = '';
+            return;
+        }
+        var html = '';
+        filtered.forEach(function (s) {
+            html += '<div class="autocomplete-item" data-name="' + escapeHtml(s.name) + '">' +
+                        '<span class="subj-name">' + escapeHtml(s.name) + '</span>' +
+                        '<span class="subj-count">' + s.count + ' teste' + (s.count > 1 ? 's' : '') + '</span>' +
+                    '</div>';
+        });
+        list.innerHTML = html;
+        list.classList.add('visible');
+        Array.prototype.forEach.call(list.querySelectorAll('.autocomplete-item'), function (item) {
+            item.addEventListener('click', function () {
+                var name = item.getAttribute('data-name');
+                document.getElementById('subjectInput').value = name;
+                list.classList.remove('visible');
+                onSubjectChange(name);
+            });
+        });
+    }
+
+    function onSubjectChange(name) {
+        currentSubject = name || null;
+        document.getElementById('userName').value = name || '';
+        updateBaseTestSelect(name);
+        updateChartSubject(name);
+        renderHistory();
+    }
+
+    function updateBaseTestSelect(name) {
+        var sel = document.getElementById('baseTestSelect');
+        if (!sel) return;
+        var subjects = getSubjects();
+        var found = subjects.find(function (s) { return s.name === name; });
+        if (!found || found.tests.length === 0) {
+            sel.innerHTML = '<option value="">— Vazio (novo perfil) —</option>';
+            return;
+        }
+        var opts = '<option value="">— Vazio (novo perfil) —</option>';
+        var sorted = found.tests.slice().sort(function (a, b) {
+            return new Date(b.test.identificacao.data) - new Date(a.test.identificacao.data);
+        });
+        sorted.forEach(function (t, i) {
+            var d = new Date(t.test.identificacao.data);
+            var dateStr = d.toLocaleDateString('pt-PT', { day: '2-digit', month: 'short' }) + ' ' +
+                          d.toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' });
+            var bal = t.test.metricas.balanco;
+            var label = (i === 0 ? "★ Último" : "Teste") + " — " + dateStr +
+                        " (bal " + (bal >= 0 ? '+' : '') + Math.round(bal) + ")";
+            opts += '<option value="' + t.originalIndex + '"' + (i === 0 ? ' selected' : '') + '>' + escapeHtml(label) + '</option>';
+        });
+        sel.innerHTML = opts;
+    }
+
+    function loadBaseTest() {
+        var sel = document.getElementById('baseTestSelect');
+        var idx = sel.value;
+        if (idx === '') {
+            clearFormKeepName();
+            showLoadInfo("Formulário limpo. Preenche os valores para o novo teste.", false);
+            return;
+        }
+        var hist = loadHistory();
+        var t = hist[Number(idx)];
+        if (!t) return;
+        applyTestToForm(t);
+        var d = new Date(t.identificacao.data);
+        showLoadInfo("✓ Carregado teste de " + d.toLocaleDateString('pt-PT') + " como base.", true);
+    }
+
+    function clearFormKeepName() {
+        document.getElementById('userProfile').value = 'geral';
+        document.getElementById('situation').value = '';
+        document.getElementById('objective').value = '';
+        ['ddExhaustion','ddObligations','ddHabits','ddFinancial','ddUnknown',
+         'amTime','amEnergy','amKnowledge','amRisk','feedback'].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) { el.value = el.defaultValue || 50; }
+        });
+        ['q1','q2','q3'].forEach(function (id) {
+            document.getElementById(id).value = '1.0';
+        });
+        document.getElementById('eaOverride').value = 'auto';
+        refreshAll();
+    }
+
+    function applyTestToForm(t) {
+        var d = t.detalhes || {};
+        var id = t.identificacao || {};
+        var met = t.metricas || {};
+
+        if (id.nome) document.getElementById('userName').value = id.nome;
+        if (id.perfil) document.getElementById('userProfile').value = id.perfil;
+        if (id.situacao) document.getElementById('situation').value = id.situacao;
+        if (id.objetivo) document.getElementById('objective').value = id.objetivo;
+
+        if (d.desgaste != null) document.getElementById('ddExhaustion').value = d.desgaste;
+        if (d.obrigacoes != null) document.getElementById('ddObligations').value = d.obrigacoes;
+        if (d.habitos != null) document.getElementById('ddHabits').value = d.habitos;
+        if (d.financeiro != null) document.getElementById('ddFinancial').value = d.financeiro;
+        if (d.desconhecimento != null) document.getElementById('ddUnknown').value = d.desconhecimento;
+
+        if (d.tempo != null) document.getElementById('amTime').value = d.tempo;
+        if (d.energia != null) document.getElementById('amEnergy').value = d.energia;
+        if (d.conhecimento != null) document.getElementById('amKnowledge').value = d.conhecimento;
+        if (d.risco != null) document.getElementById('amRisk').value = d.risco;
+
+        if (met.feedback != null) document.getElementById('feedback').value = met.feedback;
+        if (met.EA_origem === 'manual') {
+            document.getElementById('eaOverride').value = String(met.EA);
+        } else {
+            document.getElementById('eaOverride').value = 'auto';
+        }
+        refreshAll();
+    }
+
+    function showLoadInfo(msg, success) {
+        var el = document.getElementById('loadInfo');
+        if (!el) return;
+        el.innerText = msg;
+        el.style.color = success ? 'var(--success-green)' : 'var(--warning-yellow)';
+        el.classList.add('visible');
+        setTimeout(function () { el.classList.remove('visible'); }, 6000);
+    }
+
+    function refreshAll() {
+        refreshProfileInfo();
+        refreshEAInference();
+        ['ddExhaustion','ddObligations','ddHabits','ddFinancial','ddUnknown',
+         'amTime','amEnergy','amKnowledge','amRisk','feedback'].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            var badgeMap = {
+                ddExhaustion: 'v_ddEx', ddObligations: 'v_ddOb', ddHabits: 'v_ddHab',
+                ddFinancial: 'v_ddFin', ddUnknown: 'v_ddUnk',
+                amTime: 'v_amTime', amEnergy: 'v_amEnergy',
+                amKnowledge: 'v_amKnow', amRisk: 'v_amRisk', feedback: 'v_fb'
+            };
+            updateVal(badgeMap[id], el.value);
+        });
+    }
+
+    function newSubject() {
+        document.getElementById('subjectInput').value = '';
+        currentSubject = null;
+        clearFormKeepName();
+        updateBaseTestSelect('');
+        updateChartSubject('');
+        document.getElementById('loadInfo').classList.remove('visible');
+        showLoadInfo("Novo sujeito em branco.", false);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function runOraculo() {
+        try {
+            document.getElementById('errorBanner').style.display = 'none';
+
+            var userName = str('userName').trim() || str('subjectInput').trim() || 'Zimous';
+            var profileKey = str('userProfile');
+            var profile = PROFILES[profileKey] || PROFILES.geral;
+            var situation = str('situation');
+            var objective = str('objective');
+
+            var ddEx = val('ddExhaustion'), ddOb = val('ddObligations'), ddHab = val('ddHabits'), ddFin = val('ddFinancial'), ddUnk = val('ddUnknown');
+            var amTime = val('amTime'), amEnergy = val('amEnergy'), amKnow = val('amKnowledge'), amRisk = val('amRisk');
+            var feedback = val('feedback');
+            var ea = getEA();
+
+            var baseDD = weightedGeoMean([ddEx, ddOb, ddHab, ddFin, ddUnk], [profile.ddWeights.ex, profile.ddWeights.ob, profile.ddWeights.hab, profile.ddWeights.fin, profile.ddWeights.unk]);
+            var baseAM = weightedGeoMean([amTime, amEnergy, amKnow, amRisk], [profile.amWeights.time, profile.amWeights.energy, profile.amWeights.know, profile.amWeights.risk]);
+
+            var feedbackFactor = 1 + (feedback / 100) * 0.35;
+            var effectiveDD = Math.min(100, baseDD * feedbackFactor);
+            var effectiveAM = baseAM * ea;
+            var netTrajectory = effectiveAM - effectiveDD;
+
+            rawBase = {
+                baseAM: baseAM, baseDD: effectiveDD,
+                amTime: amTime, amEnergy: amEnergy, amKnow: amKnow, amRisk: amRisk,
+                ddEx: ddEx, ddOb: ddOb, ddHab: ddHab, ddFin: ddFin, ddUnk: ddUnk,
+                ea: ea, profileKey: profileKey
+            };
+
+            globalData = {
+                schema_version: SCHEMA_VERSION,
+                autor: "Zimous David",
+                identificacao: {
+                    nome: userName, perfil: profileKey, perfil_label: profile.label,
+                    situacao: situation, objetivo: objective, data: new Date().toISOString()
+                },
+                metricas: {
+                    AM_base: round2(baseAM), DD_base: round2(baseDD), DD_efetiva: round2(effectiveDD),
+                    EA: round2(ea), EA_origem: str('eaOverride') !== 'auto' ? 'manual' : 'inferido',
+                    efeito_util: round2(effectiveAM), balanco: round2(netTrajectory), feedback: feedback
+                },
+                detalhes: {
+                    desgaste: ddEx, obrigacoes: ddOb, habitos: ddHab, financeiro: ddFin, desconhecimento: ddUnk,
+                    tempo: amTime, energia: amEnergy, conhecimento: amKnow, risco: amRisk
+                }
+            };
+
+            document.getElementById('mAM').innerText = Math.round(baseAM);
+            document.getElementById('mDD').innerText = Math.round(effectiveDD);
+            document.getElementById('mEA').innerText = ea.toFixed(1);
+            document.getElementById('mEff').innerText = Math.round(effectiveAM);
+            document.getElementById('mMargin').innerText = (netTrajectory >= 0 ? "+" : "") + Math.round(netTrajectory);
+
+            var fillPercent = Math.max(5, Math.min(100, 50 + (netTrajectory * 1.5)));
+            var gaugeFill = document.getElementById('gaugeFill');
+            gaugeFill.style.width = fillPercent + '%';
+
+            var rTitle = document.getElementById('rTitle');
+            var rSubtitle = document.getElementById('rSubtitle');
+            var vReading = document.getElementById('vReading');
+            var vPrescription = document.getElementById('vPrescription');
+
+            var readingText = "", prescriptionText = "", themeColor = "";
+            var tPos = profile.thresholds.positive;
+            var tNeu = profile.thresholds.neutral;
+
+            if (netTrajectory >= tPos) {
+                themeColor = "var(--success-green)";
+                rTitle.innerText = "ALAVANCAGEM POSITIVA";
+                rTitle.style.color = themeColor;
+                rSubtitle.innerText = "O agente domina a trajetória e reconstrói o ambiente.";
+                readingText = "Capacidade de intervenção útil supera a inércia do meio.";
+                prescriptionText = "<strong>Ação recomendada:</strong> Consolida e aplica o excedente em ativos de longo prazo.";
+            } else if (netTrajectory >= tNeu) {
+                themeColor = "var(--warning-yellow)";
+                rTitle.innerText = "EQUILÍBRIO INSTÁVEL";
+                rTitle.style.color = themeColor;
+                rSubtitle.innerText = "Manutenção compensatória.";
+                readingText = "O esforço empata com a força do rio. Eleva o EA para Estrutural.";
+                prescriptionText = "<strong>Ação recomendada:</strong> Isola o fator de maior atrito e protege energia.";
+            } else {
+                themeColor = "var(--danger-red)";
+                rTitle.innerText = "INÉRCIA CAUSAL DOMINANTE";
+                rTitle.style.color = themeColor;
+                rSubtitle.innerText = "Colapso ativo do sistema.";
+                readingText = "Défice severo de alavancagem. Sobrecarga mecânica.";
+                prescriptionText = "<strong>Prescrição:</strong> Proíbida Ação Bruta. Ataca o maior fator de DD isoladamente.";
+            }
+
+            gaugeFill.style.backgroundColor = themeColor;
+            document.getElementById('resultsCard').style.borderColor = themeColor;
+            vReading.innerHTML = readingText;
+            vPrescription.innerHTML = prescriptionText;
+
+            var card = document.getElementById('resultsCard');
+            card.style.display = 'block';
+            if (card.scrollIntoView) card.scrollIntoView({ behavior: 'smooth' });
+        } catch (e) {
+            showError(e.message);
+        }
+    }
+
+    function runSimulation() {
+        if (!rawBase || typeof rawBase.baseDD === 'undefined') return;
+        var drop = Number(document.getElementById('simDDDrop').value);
+        var simEA = Number(document.getElementById('simEA').value);
+        document.getElementById('simDDVal').innerText = drop + " pontos";
+        var simDD = Math.max(1, rawBase.baseDD - drop);
+        var simNet = (rawBase.baseAM * simEA) - simDD;
+        document.getElementById('simResult').innerText = "Simulação: DD passa para " + Math.round(simDD) + " | Balanço: " + (simNet >= 0 ? "+" : "") + Math.round(simNet) + ".";
+    }
+
+    function saveLocal() {
+        if (!globalData.identificacao) { alert("Executa primeiro o diagnóstico."); return; }
+        var hist = loadHistory();
+        hist.push(globalData);
+        saveHistory(hist);
+        var name = globalData.identificacao.nome;
+        currentSubject = name;
+        document.getElementById('subjectInput').value = name;
+        renderHistory();
+        updateBaseTestSelect(name);
+        updateChartSubject(name);
+        alert("Guardado com sucesso para '" + name + "'.");
+    }
+
+    function renderHistory() {
+        var hist = loadHistory();
+        var list = document.getElementById('historyList');
+        var count = document.getElementById('histCount');
+        var actions = document.getElementById('histActions');
+
+        if (count) count.innerText = hist.length;
+        if (hist.length === 0) {
+            list.innerHTML = '<p class="history-empty">Ainda sem diagnósticos guardados.</p>';
+            if (actions) actions.style.display = 'none';
+            return;
+        }
+        if (actions) actions.style.display = 'flex';
+
+        var subjects = getSubjects();
+        var html = '';
+        subjects.forEach(function (s) {
+            var isOpen = currentSubject === s.name;
+            var sorted = s.tests.slice().sort(function (a, b) {
+                return new Date(b.test.identificacao.data) - new Date(a.test.identificacao.data);
+            });
+            var latest = sorted[0].test;
+            var latestBal = latest.metricas.balanco || 0;
+            var balCls = latestBal >= 15 ? 'pos' : (latestBal <= -10 ? 'neg' : 'neu');
+
+            html += '<div class="subject-group' + (isOpen ? ' open' : '') + '" data-subject="' + escapeHtml(s.name) + '">';
+            html += '<div class="subject-header" onclick="toggleSubjectGroup(this)">';
+            html += '<div class="name">' + escapeHtml(s.name) + '<span class="profile-badge">' + escapeHtml(latest.identificacao.perfil_label) + '</span></div>';
+            html += '<div class="meta"><span>' + s.count + ' teste(s)</span><span class="test-balance ' + balCls + '">últ: ' + (latestBal >= 0 ? '+' : '') + Math.round(latestBal) + '</span><span class="arrow">▼</span></div>';
+            html += '</div><div class="subject-tests">';
+            sorted.forEach(function (t) {
+                var d = new Date(t.test.identificacao.data);
+                var bal = t.test.metricas.balanco || 0;
+                var cls = bal >= 15 ? 'pos' : (bal <= -10 ? 'neg' : 'neu');
+                html += '<div class="test-item"><div><div>' + d.toLocaleDateString('pt-PT') + ' ' + d.toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' }) + '</div><div class="test-meta">EA ' + t.test.metricas.EA + '</div></div>';
+                html += '<span class="test-balance ' + cls + '">' + (bal >= 0 ? '+' : '') + Math.round(bal) + '</span>';
+                html += '<div class="test-actions"><button type="button" class="btn-small" onclick="loadTest(' + t.originalIndex + ')">Carregar</button><button type="button" class="btn-small danger" onclick="deleteTest(' + t.originalIndex + ')">Apagar</button></div></div>';
+            });
+            html += '</div></div>';
+        });
+        list.innerHTML = html;
+    }
+
+    function toggleSubjectGroup(el) {
+        var group = el.parentNode;
+        group.classList.toggle('open');
+        var name = group.getAttribute('data-subject');
+        if (group.classList.contains('open')) {
+            currentSubject = name;
+            document.getElementById('subjectInput').value = name;
+            updateBaseTestSelect(name);
+            updateChartSubject(name);
+        }
+    }
+
+    function loadTest(idx) {
+        var hist = loadHistory();
+        var t = hist[idx];
+        if (!t) return;
+        applyTestToForm(t);
+        currentSubject = t.identificacao.nome;
+        document.getElementById('subjectInput').value = currentSubject;
+        updateBaseTestSelect(currentSubject);
+        updateChartSubject(currentSubject);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function deleteTest(idx) {
+        if (!confirm("Apagar este teste?")) return;
+        var hist = loadHistory();
+        hist.splice(idx, 1);
+        saveHistory(hist);
+        renderHistory();
+        updateChartSubject(currentSubject);
+    }
+
+    function clearHistory() {
+        if (!confirm("Apagar todo o histórico?")) return;
+        localStorage.removeItem(HIST_KEY);
+        renderHistory();
+        updateChartSubject('');
+    }
+
+    function exportHistory() {
+        var hist = loadHistory();
+        if (hist.length === 0) { alert("Histórico vazio."); return; }
+        var blob = new Blob([JSON.stringify(hist, null, 2)], { type: 'application/json' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = "oraculo_historico_completo.json";
+        a.click(); URL.revokeObjectURL(a.href);
+    }
+
+    function exportJSON() {
+        if (!globalData.identificacao) { alert("Executa primeiro."); return; }
+        var blob = new Blob([JSON.stringify(globalData, null, 2)], { type: 'application/json' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = "oraculo_" + globalData.identificacao.nome.toLowerCase() + ".json";
+        a.click(); URL.revokeObjectURL(a.href);
+    }
+
+    function exportSubjectJSON() {
+        if (!currentSubject) { alert("Seleciona um sujeito."); return; }
+        var found = getSubjects().find(function (s) { return s.name === currentSubject; });
+        var blob = new Blob([JSON.stringify(found.tests.map(function(t){return t.test;}), null, 2)], { type: 'application/json' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = "oraculo_sujeito_" + currentSubject.toLowerCase() + ".json";
+        a.click(); URL.revokeObjectURL(a.href);
+    }
+
+    function exportAISummary() {
+        if (!currentSubject) { alert("Seleciona um sujeito."); return; }
+        var found = getSubjects().find(function (s) { return s.name === currentSubject; });
+        var md = "# Relatório Teoria de Zimous — Autor: Zimous David\n## Sujeito: " + currentSubject + "\n\n";
+        found.tests.forEach(function (t, i) {
+            md += "### Teste " + (i+1) + " (" + t.test.identificacao.data + ")\n- Balanço: " + t.test.metricas.balanco + "\n- AM: " + t.test.metricas.AM_base + " | DD: " + t.test.metricas.DD_efetiva + " | EA: " + t.test.metricas.EA + "\n\n";
+        });
+        var blob = new Blob([md], { type: 'text/markdown' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = "oraculo_" + currentSubject.toLowerCase() + "_ia.md";
+        a.click(); URL.revokeObjectURL(a.href);
+    }
+
+    function printSubject() { window.print(); }
+
+    function setChartMode(mode) {
+        chartMode = mode;
+        document.getElementById('chartModeSimple').classList.toggle('active', mode === 'simple');
+        document.getElementById('chartModeDetailed').classList.toggle('active', mode === 'detailed');
+        updateChartSubject(currentSubject);
+    }
+
+    function updateChartSubject(name) {
+        var card = document.getElementById('chartCard');
+        var chartName = document.getElementById('chartSubjectName');
+        if (!card) return;
+        if (!name) { card.style.display = 'none'; return; }
+        var found = getSubjects().find(function (s) { return s.name === name; });
+        if (!found || found.tests.length < 1) { card.style.display = 'none'; return; }
+        card.style.display = 'block';
+        if (chartName) chartName.innerText = name;
+        var tests = found.tests.map(function (t) { return t.test; });
+        tests.sort(function (a, b) { return new Date(a.identificacao.data) - new Date(b.identificacao.data); });
+        drawChart(tests);
+    }
+
+    function drawChart(tests) {
+        var svg = document.getElementById('evolutionChart');
+        var legend = document.getElementById('chartLegend');
+        if (!svg) return;
+        var W = 800, H = 220, PAD_L = 50, PAD_R = 20, PAD_T = 20, PAD_B = 40;
+        var innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B, n = tests.length;
+
+        var series = [];
+        if (chartMode === 'simple') {
+            series.push({ key: 'balanco', label: 'Balanço', color: '#d4af37', values: tests.map(function (t) { return t.metricas.balanco; }) });
+        } else {
+            series.push({ key: 'balanco', label: 'Balanço', color: '#d4af37', values: tests.map(function (t) { return t.metricas.balanco; }) });
+            series.push({ key: 'AM', label: 'AM base', color: '#10b981', values: tests.map(function (t) { return t.metricas.AM_base; }) });
+            series.push({ key: 'DD', label: 'DD efetiva', color: '#ef4444', values: tests.map(function (t) { return t.metricas.DD_efetiva; }) });
+        }
+
+        var allVals = [];
+        series.forEach(function (s) { s.values.forEach(function (v) { allVals.push(v); }); });
+        var minV = Math.min.apply(null, allVals.concat([-15]));
+        var maxV = Math.max.apply(null, allVals.concat([15]));
+        var range = maxV - minV || 1;
+
+        function x(i) { return PAD_L + (n > 1 ? (i / (n - 1)) * innerW : innerW / 2); }
+        function y(v) { return PAD_T + innerH - ((v - minV) / range) * innerH; }
+
+        var svgContent = '';
+        for (var i = 0; i <= 4; i++) {
+            var v = minV + (range * i / 4);
+            var yy = y(v);
+            svgContent += '<line x1="' + PAD_L + '" y1="' + yy.toFixed(1) + '" x2="' + (W - PAD_R) + '" y2="' + yy.toFixed(1) + '" stroke="#1e2536" stroke-width="0.5"/>';
+            svgContent += '<text x="' + (PAD_L - 6) + '" y="' + (yy + 4).toFixed(1) + '" fill="#a3b0c2" font-size="10" text-anchor="end">' + Math.round(v) + '</text>';
+        }
+
+        tests.forEach(function (t, i) {
+            var d = new Date(t.identificacao.data);
+            svgContent += '<text x="' + x(i).toFixed(1) + '" y="' + (H - PAD_B + 16) + '" fill="#a3b0c2" font-size="9" text-anchor="middle">' + d.toLocaleDateString('pt-PT', { day: '2-digit', month: '2-digit' }) + '</text>';
+        });
+
+        series.forEach(function (s) {
+            var pathD = '';
+            s.values.forEach(function (v, i) { pathD += (i === 0 ? 'M' : 'L') + x(i).toFixed(1) + ',' + y(v).toFixed(1); });
+            svgContent += '<path d="' + pathD + '" fill="none" stroke="' + s.color + '" stroke-width="2"/>';
+            s.values.forEach(function (v, i) {
+                svgContent += '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(v).toFixed(1) + '" r="3.5" fill="' + s.color + '"/>';
+            });
+        });
+        svg.innerHTML = svgContent;
+
+        var legendHtml = '';
+        series.forEach(function (s) { legendHtml += '<span><span class="dot" style="background:' + s.color + ';"></span>' + s.label + '</span>'; });
+        if (legend) legend.innerHTML = legendHtml;
+    }
+
+    function resetForm() { document.getElementById('resultsCard').style.display = 'none'; window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+    // EXPOSIÇÃO GLOBAL DE FUNÇÕES PARA OS BOTÕES INLINE DO HTML
+    window.runOraculo = runOraculo;
+    window.runSimulation = runSimulation;
+    window.updateVal = updateVal;
+    window.toggleHelp = toggleHelp;
+    window.exportJSON = exportJSON;
+    window.saveLocal = saveLocal;
+    window.resetForm = resetForm;
+    window.loadTest = loadTest;
+    window.deleteTest = deleteTest;
+    window.clearHistory = clearHistory;
+    window.exportHistory = exportHistory;
+    window.exportSubjectJSON = exportSubjectJSON;
+    window.exportAISummary = exportAISummary;
+    window.printSubject = printSubject;
+    window.setChartMode = setChartMode;
+    window.toggleSubjectGroup = toggleSubjectGroup;
+    window.newSubject = newSubject;
+    window.loadBaseTest = loadBaseTest;
+    window.toggleThesis = toggleThesis;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var btn = document.getElementById('btnProcessar');
+        if (btn) btn.addEventListener('click', function (e) { e.preventDefault(); runOraculo(); });
+
+        var profSel = document.getElementById('userProfile');
+        if (profSel) { profSel.addEventListener('change', refreshProfileInfo); refreshProfileInfo(); }
+
+        ['q1', 'q2', 'q3', 'eaOverride'].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) el.addEventListener('change', refreshEAInference);
+        });
+        refreshEAInference();
+
+        var input = document.getElementById('subjectInput');
+        if (input) {
+            input.addEventListener('focus', function () { renderAutocomplete(input.value); });
+            input.addEventListener('input', function () {
+                renderAutocomplete(input.value);
+                document.getElementById('userName').value = input.value;
+            });
+        }
+        renderHistory();
+    });
+})();
+</script>
+
+</body>
+</html>
